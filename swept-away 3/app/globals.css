@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: #0a0a0b;
+    --paper: #f6f5f2;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--ink);
+    color: var(--paper);
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #bba37e;
+    color: #0a0a0b;
+  }
+
+  /* Quiet, premium focus ring */
+  :focus-visible {
+    outline: 1px solid #bba37e;
+    outline-offset: 3px;
+  }
+
+  /* Minimal scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2c;
+    border-radius: 99px;
+  }
+}
+
+@layer utilities {
+  /* Cinematic film grain overlay */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Tasteful placeholder surfaces — replace with real media later.
+     They read as soft, lit interiors rather than empty boxes. */
+  .ph {
+    background-color: #1a1a1c;
+    background-image:
+      radial-gradient(120% 90% at 20% 10%, rgba(255, 255, 255, 0.14), transparent 55%),
+      radial-gradient(120% 120% at 85% 90%, rgba(187, 163, 126, 0.12), transparent 60%),
+      linear-gradient(135deg, #242427 0%, #131315 60%, #0d0d0f 100%);
+  }
+  .ph-light {
+    background-color: #e9e7e1;
+    background-image:
+      radial-gradient(110% 80% at 25% 15%, rgba(255, 255, 255, 0.9), transparent 55%),
+      radial-gradient(120% 120% at 80% 95%, rgba(187, 163, 126, 0.25), transparent 60%),
+      linear-gradient(135deg, #f3f1ec 0%, #ddd9d0 100%);
+  }
+  .ph-warm {
+    background-color: #1c1a18;
+    background-image:
+      radial-gradient(120% 90% at 70% 20%, rgba(187, 163, 126, 0.28), transparent 55%),
+      linear-gradient(135deg, #2a2622 0%, #131210 70%);
+  }
+
+  /* Before/After: drop in images later, e.g. in a component style:
+       style={{ backgroundImage: "url(/media/after.jpg)" }} */
+  .ba-before,
+  .ba-after {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
